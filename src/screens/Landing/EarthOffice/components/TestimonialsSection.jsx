@@ -238,7 +238,7 @@ function TestimonialsSection() {
         style={{ background: 'radial-gradient(ellipse 50% 60% at 50% 50%, rgba(0,158,221,0.05) 0%, transparent 70%)' }}
       />
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-16">
+      <div className="relative z-10 w-full sm:max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-16">
 
         {/* ── Heading ── */}
         <div className="mb-16">

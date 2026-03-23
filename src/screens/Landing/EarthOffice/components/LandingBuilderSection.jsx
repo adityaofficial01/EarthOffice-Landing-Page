@@ -68,7 +68,7 @@ function LandingBuilderSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-[85vw] mx-auto px-16">
+      <div className="relative z-10 w-full sm:max-w-[85vw] mx-auto px-4 sm:px-8 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
 
           {/* ════════ LEFT — copy ════════ */}

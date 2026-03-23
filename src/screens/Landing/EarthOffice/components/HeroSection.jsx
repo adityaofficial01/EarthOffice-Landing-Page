@@ -145,7 +145,7 @@ export default function HeroSection() {
       />
 
       {/* ── Main content grid ── */}
-      <div className="relative z-10 max-w-[85vw] mx-auto w-full px-16 pt-[72px] grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10  sm:max-w-[85vw] mx-auto w-full px-4 sm:px-16 pt-[72px] grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* ════ LEFT ════ */}
         <div>

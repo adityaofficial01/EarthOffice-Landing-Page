@@ -5,7 +5,7 @@ import { FEATURES } from '../constants/data';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Mini bar chart visual (used in hero card) ───────────────────────────────
+// ─── Mini bar chart visual ────────────────────────────────────────────────────
 function MiniBarChart() {
   const bars = [
     { height: 24, dim: true },
@@ -17,42 +17,29 @@ function MiniBarChart() {
 
   return (
     <div
+      className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl flex-shrink-0 self-center"
       style={{
-        width: 130,
-        height: 90,
-        borderRadius: 12,
+        width: 120,
+        height: 84,
         background: 'rgba(0,158,221,0.06)',
         border: '1px solid rgba(0,158,221,0.12)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 8,
-        padding: 12,
-        flexShrink: 0,
-        alignSelf: 'center',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 5 }}>
+      <div className="flex items-end gap-[5px]">
         {bars.map((bar, i) => (
           <div
             key={i}
+            className="w-[13px] rounded-t-[3px]"
             style={{
-              width: 14,
               height: bar.height,
-              borderRadius: '3px 3px 0 0',
               background: bar.dim ? 'rgba(0,158,221,0.25)' : '#009edd',
             }}
           />
         ))}
       </div>
       <span
-        style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: 9,
-          color: '#009edd',
-          letterSpacing: '0.06em',
-        }}
+        className="font-['DM_Mono',monospace] tracking-[0.06em]"
+        style={{ fontSize: 9, color: '#009edd' }}
       >
         2,400+ contacts
       </span>
@@ -60,7 +47,7 @@ function MiniBarChart() {
   );
 }
 
-// ─── Role chips visual (used in wide card-d) ─────────────────────────────────
+// ─── Role chips visual ────────────────────────────────────────────────────────
 function RoleChips() {
   const roles = [
     { label: 'Admin · Full access', color: '#22c55e' },
@@ -69,40 +56,20 @@ function RoleChips() {
   ];
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-        alignSelf: 'center',
-        flexShrink: 0,
-      }}
-    >
+    <div className="flex flex-col gap-2 self-center flex-shrink-0">
       {roles.map((role, i) => (
         <div
           key={i}
+          className="flex items-center gap-2 rounded-[10px] px-3 py-2 text-slate-700 whitespace-nowrap font-['Syne',sans-serif]"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
+            fontSize: 11,
             background: 'rgba(0,158,221,0.06)',
             border: '1px solid rgba(0,158,221,0.12)',
-            borderRadius: 10,
-            padding: '8px 12px',
-            fontSize: 11,
-            color: '#334155',
-            whiteSpace: 'nowrap',
-            fontFamily: "'Syne', sans-serif",
           }}
         >
           <span
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: '50%',
-              background: role.color,
-              flexShrink: 0,
-            }}
+            className="w-[7px] h-[7px] rounded-full flex-shrink-0"
+            style={{ background: role.color }}
           />
           {role.label}
         </div>
@@ -115,52 +82,28 @@ function RoleChips() {
 function CardTag({ label }) {
   return (
     <div
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 6,
-        fontFamily: "'DM Mono', monospace",
-        fontSize: 10,
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        color: '#009edd',
-        marginBottom: 10,
-      }}
+      className="inline-flex items-center gap-1.5 mb-2.5 font-['DM_Mono',monospace] text-[10px] tracking-[0.1em] uppercase"
+      style={{ color: '#009edd' }}
     >
-      <span
-        style={{ width: 5, height: 5, borderRadius: '50%', background: '#009edd' }}
-      />
+      <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: '#009edd' }} />
       {label}
     </div>
   );
 }
 
-// ─── Learn more arrow link ────────────────────────────────────────────────────
+// ─── Learn more link ──────────────────────────────────────────────────────────
 function LearnMore({ visible }) {
   return (
     <div
+      className="inline-flex items-center gap-1.5 mt-4 text-[0.8rem] font-bold font-['Syne',sans-serif] transition-[opacity,transform] duration-[250ms]"
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-        marginTop: 16,
-        fontSize: '0.8rem',
-        fontWeight: 700,
         color: '#009edd',
-        fontFamily: "'Syne', sans-serif",
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(4px)',
-        transition: 'opacity 0.25s, transform 0.25s',
       }}
     >
       Learn more
-      <svg
-        style={{ width: 14, height: 14 }}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        viewBox="0 0 24 24"
-      >
+      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5-5 5M6 12h12" />
       </svg>
     </div>
@@ -168,40 +111,27 @@ function LearnMore({ visible }) {
 }
 
 // ─── Base card shell ──────────────────────────────────────────────────────────
-function CardShell({ children, cardRef, style = {}, onHover, hovered }) {
+function CardShell({ children, cardRef, onHover, hovered }) {
   return (
     <div
       ref={cardRef}
+      className="bg-white rounded-[20px] p-6 relative overflow-hidden cursor-default transition-[border-color,transform,box-shadow] duration-[250ms] h-full"
       style={{
-        background: '#fff',
         border: `1px solid ${hovered ? 'rgba(0,158,221,0.35)' : 'rgba(226,232,240,0.8)'}`,
-        borderRadius: 20,
-        padding: 28,
-        position: 'relative',
-        overflow: 'hidden',
-        cursor: 'default',
-        transition: 'border-color 0.25s, transform 0.25s, box-shadow 0.25s',
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
         boxShadow: hovered
           ? '0 8px 36px rgba(0,158,221,0.13), 0 2px 8px rgba(0,0,0,0.06)'
           : '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
-        ...style,
       }}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
     >
       {/* Top-edge cyan rule on hover */}
       <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] transition-opacity duration-[250ms]"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '60%',
-          height: 2,
           background: 'linear-gradient(90deg, transparent, #009edd, transparent)',
           opacity: hovered ? 1 : 0,
-          transition: 'opacity 0.25s',
         }}
       />
       {children}
@@ -212,39 +142,19 @@ function CardShell({ children, cardRef, style = {}, onHover, hovered }) {
 // ─── Card index number ────────────────────────────────────────────────────────
 function CardIndex({ n }) {
   return (
-    <span
-      style={{
-        position: 'absolute',
-        top: 20,
-        right: 22,
-        fontFamily: "'DM Mono', monospace",
-        fontSize: 11,
-        fontWeight: 500,
-        color: '#cbd5e1',
-        letterSpacing: '0.1em',
-      }}
-    >
+    <span className="absolute top-[18px] right-5 font-['DM_Mono',monospace] text-[11px] font-medium text-slate-300 tracking-[0.1em]">
       {String(n).padStart(2, '0')}
     </span>
   );
 }
 
 // ─── Card icon bubble ─────────────────────────────────────────────────────────
-function CardIcon({ icon, hovered, large = false }) {
+function CardIcon({ icon, hovered }) {
   return (
     <div
+      className="w-[46px] h-[46px] rounded-[14px] flex items-center justify-center text-xl mb-4 flex-shrink-0 transition-transform duration-[250ms]"
       style={{
-        width: large ? 52 : 46,
-        height: large ? 52 : 46,
-        borderRadius: 14,
         background: 'linear-gradient(135deg, rgba(0,158,221,0.12), rgba(2,119,189,0.06))',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: large ? 24 : 20,
-        marginBottom: 18,
-        flexShrink: 0,
-        transition: 'transform 0.25s',
         transform: hovered ? 'scale(1.08)' : 'scale(1)',
       }}
     >
@@ -253,46 +163,40 @@ function CardIcon({ icon, hovered, large = false }) {
   );
 }
 
-// ─── Card A: Contacts Management (col-span-2, row 1) ─────────────────────────
+// ─── Shared card title + description ─────────────────────────────────────────
+function CardBody({ title, description, maxWidth }) {
+  return (
+    <>
+      <h3 className="font-['DM_Serif_Display',serif] text-slate-900 text-xl leading-[1.2] mb-2 mt-0">
+        {title}
+      </h3>
+      <p
+        className="font-['Syne',sans-serif] text-sm text-slate-500 leading-[1.65] m-0"
+        style={{ maxWidth: maxWidth ?? 'none' }}
+      >
+        {description}
+      </p>
+    </>
+  );
+}
+
+// ─── Card A: Contacts ─────────────────────────────────────────────────────────
 function CardContacts({ cardRef }) {
   const [hovered, setHovered] = React.useState(false);
   const feat = FEATURES[0];
 
   return (
-    <CardShell
-      cardRef={cardRef}
-      hovered={hovered}
-      onHover={setHovered}
-      style={{ gridColumn: '1 / 3', gridRow: 1 }}
-    >
+    <CardShell cardRef={cardRef} hovered={hovered} onHover={setHovered}>
       <CardIndex n={1} />
-      <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
-        <div style={{ flex: 1 }}>
+      <div className="flex flex-wrap sm:flex-nowrap gap-6 items-start">
+        <div className="flex-1 min-w-0">
           <CardIcon icon={feat?.icon ?? '👥'} hovered={hovered} />
           <CardTag label="Contacts" />
-          <h3
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: '1.35rem',
-              color: '#0f172a',
-              margin: '0 0 8px',
-              lineHeight: 1.2,
-            }}
-          >
-            {feat?.title ?? 'Contacts Management'}
-          </h3>
-          <p
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontSize: '0.875rem',
-              color: '#64748b',
-              lineHeight: 1.65,
-              margin: 0,
-              maxWidth: '38ch',
-            }}
-          >
-            {feat?.description ?? 'Centralise all your clients, partners, and leads in one intelligent hub. Sync across devices, search instantly, and never lose a connection again.'}
-          </p>
+          <CardBody
+            title={feat?.title ?? 'Contacts Management'}
+            description={feat?.description ?? 'Centralise all your clients, partners, and leads in one intelligent hub. Sync across devices, search instantly, and never lose a connection again.'}
+            maxWidth="38ch"
+          />
           <LearnMore visible={hovered} />
         </div>
         <MiniBarChart />
@@ -301,135 +205,163 @@ function CardContacts({ cardRef }) {
   );
 }
 
-// ─── Card B: Deals Tracking (col 3, row 1) ───────────────────────────────────
+// ─── Card B: Deals ────────────────────────────────────────────────────────────
 function CardDeals({ cardRef }) {
   const [hovered, setHovered] = React.useState(false);
   const feat = FEATURES[1];
 
   return (
-    <CardShell
-      cardRef={cardRef}
-      hovered={hovered}
-      onHover={setHovered}
-      style={{ gridColumn: '3 / 4', gridRow: 1 }}
-    >
+    <CardShell cardRef={cardRef} hovered={hovered} onHover={setHovered}>
       <CardIndex n={2} />
       <CardIcon icon={feat?.icon ?? '🔥'} hovered={hovered} />
       <CardTag label="Pipeline" />
-      <h3
-        style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: '1.35rem',
-          color: '#0f172a',
-          margin: '0 0 8px',
-          lineHeight: 1.2,
-        }}
-      >
-        {feat?.title ?? 'Deals Tracking'}
-      </h3>
-      <p
-        style={{
-          fontFamily: "'Syne', sans-serif",
-          fontSize: '0.875rem',
-          color: '#64748b',
-          lineHeight: 1.65,
-          margin: 0,
-        }}
-      >
-        {feat?.description ?? 'Visualise your entire sales pipeline at a glance. Move deals through stages and close faster with AI-powered insights.'}
-      </p>
+      <CardBody
+        title={feat?.title ?? 'Deals Tracking'}
+        description={feat?.description ?? 'Visualise your entire sales pipeline at a glance. Move deals through stages and close faster with AI-powered insights.'}
+      />
       <LearnMore visible={hovered} />
     </CardShell>
   );
 }
 
-// ─── Card C: Leads Management (col 1, row 2) ─────────────────────────────────
+// ─── Card C: Leads ────────────────────────────────────────────────────────────
 function CardLeads({ cardRef }) {
   const [hovered, setHovered] = React.useState(false);
   const feat = FEATURES[2];
 
   return (
-    <CardShell
-      cardRef={cardRef}
-      hovered={hovered}
-      onHover={setHovered}
-      style={{ gridColumn: '1 / 2', gridRow: 2 }}
-    >
+    <CardShell cardRef={cardRef} hovered={hovered} onHover={setHovered}>
       <CardIndex n={3} />
       <CardIcon icon={feat?.icon ?? '🎯'} hovered={hovered} />
       <CardTag label="Leads" />
-      <h3
-        style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: '1.35rem',
-          color: '#0f172a',
-          margin: '0 0 8px',
-          lineHeight: 1.2,
-        }}
-      >
-        {feat?.title ?? 'Leads Management'}
-      </h3>
-      <p
-        style={{
-          fontFamily: "'Syne', sans-serif",
-          fontSize: '0.875rem',
-          color: '#64748b',
-          lineHeight: 1.65,
-          margin: 0,
-        }}
-      >
-        {feat?.description ?? 'Capture, qualify, and nurture leads automatically. Score prospects so your team always focuses on the highest-value opportunities.'}
-      </p>
+      <CardBody
+        title={feat?.title ?? 'Leads Management'}
+        description={feat?.description ?? 'Capture, qualify, and nurture leads automatically. Score prospects so your team always focuses on the highest-value opportunities.'}
+      />
       <LearnMore visible={hovered} />
     </CardShell>
   );
 }
 
-// ─── Card D: Organization Users (col 2–3, row 2) ─────────────────────────────
+// ─── Card D: Organization Users ───────────────────────────────────────────────
 function CardOrgUsers({ cardRef }) {
   const [hovered, setHovered] = React.useState(false);
   const feat = FEATURES[3];
 
   return (
-    <CardShell
-      cardRef={cardRef}
-      hovered={hovered}
-      onHover={setHovered}
-      style={{ gridColumn: '2 / 4', gridRow: 2 }}
-    >
+    <CardShell cardRef={cardRef} hovered={hovered} onHover={setHovered}>
       <CardIndex n={4} />
-      <div style={{ display: 'flex', gap: 28, alignItems: 'flex-start' }}>
-        <div style={{ flex: 1 }}>
+      <div className="flex flex-wrap sm:flex-nowrap gap-6 items-start">
+        <div className="flex-1 min-w-0">
           <CardIcon icon={feat?.icon ?? '🏢'} hovered={hovered} />
           <CardTag label="Teams" />
-          <h3
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: '1.35rem',
-              color: '#0f172a',
-              margin: '0 0 8px',
-              lineHeight: 1.2,
-            }}
-          >
-            {feat?.title ?? 'Organization Users'}
-          </h3>
-          <p
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontSize: '0.875rem',
-              color: '#64748b',
-              lineHeight: 1.65,
-              margin: 0,
-              maxWidth: '38ch',
-            }}
-          >
-            {feat?.description ?? 'Manage roles, permissions, and teams with ease. From individual contributors to entire departments — everyone gets exactly the access they need.'}
-          </p>
+          <CardBody
+            title={feat?.title ?? 'Organization Users'}
+            description={feat?.description ?? 'Manage roles, permissions, and teams with ease. From individual contributors to entire departments — everyone gets exactly the access they need.'}
+            maxWidth="38ch"
+          />
           <LearnMore visible={hovered} />
         </div>
         <RoleChips />
       </div>
     </CardShell>
+  );
+}
+
+// ─── Bento grid ───────────────────────────────────────────────────────────────
+//
+//  Mobile  (default)  → 1 col, all cards stacked
+//  Tablet  (sm)       → 2 col, A & D span full width
+//  Desktop (lg)       → original 3-col bento
+//
+function BentoGrid({ cardsRef }) {
+  return (
+    <>
+      {/* ── Mobile: single column ── */}
+      <div className="flex flex-col gap-3 sm:hidden">
+        <CardContacts cardRef={el => (cardsRef.current[0] = el)} />
+        <CardDeals    cardRef={el => (cardsRef.current[1] = el)} />
+        <CardLeads    cardRef={el => (cardsRef.current[2] = el)} />
+        <CardOrgUsers cardRef={el => (cardsRef.current[3] = el)} />
+      </div>
+
+      {/* ── Tablet: 2-col grid ── */}
+      <div className="hidden sm:grid lg:hidden grid-cols-2 gap-3.5">
+        <div className="col-span-2">
+          <CardContacts cardRef={el => (cardsRef.current[0] = el)} />
+        </div>
+        <CardDeals cardRef={el => (cardsRef.current[1] = el)} />
+        <CardLeads cardRef={el => (cardsRef.current[2] = el)} />
+        <div className="col-span-2">
+          <CardOrgUsers cardRef={el => (cardsRef.current[3] = el)} />
+        </div>
+      </div>
+
+      {/* ── Desktop: 3-col bento ── */}
+      <div className="hidden lg:grid grid-cols-3 gap-3.5">
+        <div className="col-span-2">
+          <CardContacts cardRef={el => (cardsRef.current[0] = el)} />
+        </div>
+        <div className="col-span-1">
+          <CardDeals cardRef={el => (cardsRef.current[1] = el)} />
+        </div>
+        <div className="col-span-1">
+          <CardLeads cardRef={el => (cardsRef.current[2] = el)} />
+        </div>
+        <div className="col-span-2">
+          <CardOrgUsers cardRef={el => (cardsRef.current[3] = el)} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ─── Stats strip ──────────────────────────────────────────────────────────────
+function StatsStrip() {
+  const stats = [
+    { value: '10×',    label: 'Faster Pipeline' },
+    { value: '99.9%',  label: 'Uptime SLA' },
+    { value: '2,400+', label: 'Teams Trust Us' },
+    { value: '< 2h',   label: 'To Onboard' },
+  ];
+
+  return (
+    <div
+      className="mt-12 lg:mt-20 rounded-3xl overflow-hidden"
+      style={{ background: '#0d1117', boxShadow: '0 20px 60px rgba(0,0,0,0.18)' }}
+    >
+      {/* Top cyan accent line */}
+      <div
+        className="h-px w-full"
+        style={{ background: 'linear-gradient(90deg, transparent, #009edd 40%, transparent)' }}
+      />
+
+      <div className="grid grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat, i) => (
+          <div
+            key={i}
+            className="flex flex-col items-center py-7 px-4 lg:py-10 lg:px-6 hover:bg-white/[0.03] transition-colors duration-200"
+            style={{
+              borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+              borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+            }}
+          >
+            <span
+              className="font-['DM_Serif_Display',serif] text-[2rem] lg:text-[2.5rem] leading-none tracking-[-0.03em] mb-2"
+              style={{ color: '#009edd' }}
+            >
+              {stat.value}
+            </span>
+            <span
+              className="font-['DM_Mono',monospace] text-[10px] tracking-[0.08em] uppercase text-center"
+              style={{ color: '#8b949e' }}
+            >
+              {stat.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -450,15 +382,18 @@ function FeaturesSection() {
         }
       );
 
-      gsap.fromTo(
-        cardsRef.current,
-        { y: 60, opacity: 0, scale: 0.97 },
-        {
-          y: 0, opacity: 1, scale: 1,
-          duration: 0.75, stagger: 0.1, ease: 'power3.out',
-          scrollTrigger: { trigger: cardsRef.current[0], start: 'top 88%' },
-        }
-      );
+      const validCards = cardsRef.current.filter(Boolean);
+      if (validCards.length) {
+        gsap.fromTo(
+          validCards,
+          { y: 60, opacity: 0, scale: 0.97 },
+          {
+            y: 0, opacity: 1, scale: 1,
+            duration: 0.75, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: validCards[0], start: 'top 88%' },
+          }
+        );
+      }
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -467,8 +402,7 @@ function FeaturesSection() {
     <section
       id="features"
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
-      style={{ background: '#f8fafc' }}
+      className="relative py-16 lg:py-32 overflow-hidden bg-slate-50"
     >
       {/* Subtle dot grid */}
       <div
@@ -480,80 +414,42 @@ function FeaturesSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-[85vw] mx-auto px-16">
+      <div className="relative z-10 w-full lg:max-w-[85vw] mx-auto px-4 sm:px-8 lg:px-16">
 
         {/* ── Section heading ── */}
-        <div ref={headingRef} className="mb-16">
-          <div className="inline-flex items-center gap-2.5 mb-6 font-['DM_Mono',monospace] text-[11px] tracking-[0.12em] uppercase text-[#8b949e]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009edd]" />
+        <div ref={headingRef} className="mb-10 lg:mb-16">
+
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-2.5 mb-6 font-['DM_Mono',monospace] text-[11px] tracking-[0.12em] uppercase text-slate-400">
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#009edd' }} />
             <span>Core CRM</span>
             <span className="w-6 h-px bg-slate-300" />
-            <span className="text-[#009edd]">All-in-one</span>
+            <span style={{ color: '#009edd' }}>All-in-one</span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <h2
-              className="font-['DM_Serif_Display',serif] text-slate-900 leading-[1.1] tracking-[-0.02em]"
-              style={{ fontSize: 'clamp(2.25rem, 4vw, 3.75rem)' }}
-            >
+          {/* Headline + subtitle */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6">
+            <h2 className="font-['DM_Serif_Display',serif] text-slate-900 leading-[1.1] tracking-[-0.02em] m-0 text-[2rem] sm:text-[2.75rem] lg:text-[clamp(2.25rem,4vw,3.75rem)]">
               Everything you need,{' '}
-              <span className="italic text-[#009edd]">in one place.</span>
+              <span className="italic" style={{ color: '#009edd' }}>in one place.</span>
             </h2>
-            <p className="font-['Syne',sans-serif] text-slate-500 text-base leading-relaxed max-w-xs sm:text-right shrink-0">
+            <p className="font-['Syne',sans-serif] text-slate-500 text-[0.9rem] leading-[1.7] m-0 sm:max-w-[22ch] sm:text-right sm:shrink-0">
               Powerful tools to manage relationships, track revenue, and grow your business.
             </p>
           </div>
 
-          <div className="mt-8 h-px bg-gradient-to-r from-[#009edd]/30 via-slate-200 to-transparent" />
+          {/* Divider */}
+          <div
+            className="mt-7 h-px"
+            style={{ background: 'linear-gradient(90deg, rgba(0,158,221,0.3), #e2e8f0, transparent)' }}
+          />
         </div>
 
-        {/* ── Bento feature grid ── */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gridTemplateRows: 'auto auto',
-            gap: 14,
-          }}
-        >
-          <CardContacts cardRef={el => (cardsRef.current[0] = el)} />
-          <CardDeals    cardRef={el => (cardsRef.current[1] = el)} />
-          <CardLeads    cardRef={el => (cardsRef.current[2] = el)} />
-          <CardOrgUsers cardRef={el => (cardsRef.current[3] = el)} />
-        </div>
+        {/* ── Bento grid ── */}
+        <BentoGrid cardsRef={cardsRef} />
 
         {/* ── Stats strip ── */}
-        <div
-          className="mt-20 rounded-3xl overflow-hidden"
-          style={{ background: '#0d1117', boxShadow: '0 20px 60px rgba(0,0,0,0.18)' }}
-        >
-          <div
-            className="h-px w-full"
-            style={{ background: 'linear-gradient(90deg, transparent, #009edd 40%, transparent)' }}
-          />
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {[
-              { value: '10×',    label: 'Faster Pipeline' },
-              { value: '99.9%',  label: 'Uptime SLA' },
-              { value: '2,400+', label: 'Teams Trust Us' },
-              { value: '< 2h',   label: 'To Onboard' },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center py-10 px-6 border-r border-white/[0.07] last:border-r-0 hover:bg-white/[0.03] transition-colors duration-200"
-              >
-                <span
-                  className="font-['DM_Serif_Display',serif] text-[2.5rem] leading-none text-[#009edd] tracking-[-0.03em] mb-2"
-                >
-                  {stat.value}
-                </span>
-                <span className="font-['DM_Mono',monospace] text-[11px] text-[#8b949e] tracking-[0.08em] uppercase text-center">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <StatsStrip />
       </div>
     </section>
   );

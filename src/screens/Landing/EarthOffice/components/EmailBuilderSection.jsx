@@ -179,7 +179,7 @@ function EmailBuilderSection() {
         style={{ background: 'radial-gradient(ellipse 60% 50% at 20% 60%, rgba(0,158,221,0.03) 0%, transparent 70%)' }}
       />
 
-      <div className="relative z-10 max-w-[85vw] mx-auto px-16">
+      <div className="relative z-10 w-full sm:max-w-[85vw] mx-auto px-4 sm:px-8 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
 
           {/* ════════ LEFT — stacked floating email cards ════════ */}

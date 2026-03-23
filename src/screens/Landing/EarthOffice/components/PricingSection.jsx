@@ -312,7 +312,7 @@ function PricingSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-16">
+      <div className="relative z-10 w-full sm:max-w-[1280px] mx-auto px-4 sm:px-16">
 
         {/* ── Heading ── */}
         <div className="mb-16">
