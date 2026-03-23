@@ -266,9 +266,9 @@ export default function HeroSection() {
               </span>
             </div>
             {[
-              { stage: 'Prospecting',   deals: 24, pct: 85, color: '#009edd', delay: 0   },
-              { stage: 'Proposal Sent', deals: 14, pct: 60, color: '#38bdf8', delay: 100 },
-              { stage: 'Negotiation',   deals: 9,  pct: 40, color: '#0277bd', delay: 200 },
+              { stage: 'Deals',   deals: 24, pct: 85, color: '#009edd', delay: 0   },
+              { stage: 'Contacting', deals: 14, pct: 60, color: '#38bdf8', delay: 100 },
+              { stage: 'Qualified',   deals: 9,  pct: 40, color: '#0277bd', delay: 200 },
               { stage: 'Closing',       deals: 5,  pct: 22, color: '#10b981', delay: 300 },
             ].map(r => <PipelineRow key={r.stage} {...r} />)}
           </div>
@@ -286,7 +286,7 @@ export default function HeroSection() {
             <div className="flex-1">
               <p className="font-['DM_Mono'] text-[10px] font-medium tracking-[0.1em] uppercase text-[#009edd] mb-1">AI Insight</p>
               <p className="text-[0.8125rem] text-[#b1bac4] leading-[1.55]">
-                Follow up with <strong className="text-[#e6edf3]">Luca Ferrari</strong> — idle 5 days.{' '}
+                Follow up with <strong className="text-[#e6edf3]">Deal Match AI</strong> — idle 5 days.{' '}
                 Close probability: <strong className="text-[#009edd]">87%</strong>
               </p>
             </div>

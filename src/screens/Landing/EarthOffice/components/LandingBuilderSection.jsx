@@ -44,7 +44,7 @@ function LandingBuilderSection() {
   }, []);
 
   const checkItems = [
-    '50+ professionally designed templates',
+    'professionally designed templates',
     'Real-time preview on all screen sizes',
     'Auto-connect forms to your CRM leads',
     'Custom domain publishing in one click',

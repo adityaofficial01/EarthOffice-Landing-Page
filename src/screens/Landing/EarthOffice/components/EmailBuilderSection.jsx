@@ -58,7 +58,7 @@ const TEMPLATES = [
 ];
 
 const MINI_FEATURES = [
-  { icon: '🎨', title: 'Visual Drag & Drop',    desc: 'Blocks, fonts, brand colours' },
+  { icon: '🎨', title: 'Rich editor for designing',    desc: 'Blocks, fonts, brand colours' },
   { icon: '📱', title: 'Mobile-First',           desc: 'Perfect on every screen' },
   { icon: '⚡', title: 'Smart Personalisation',  desc: 'CRM data auto-filled' },
   { icon: '📈', title: 'Built-in Analytics',     desc: 'Opens, clicks & conversions' },

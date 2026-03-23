@@ -52,7 +52,7 @@ export const ADDONS = [
   {
     id: 1,
     icon: '🤖',
-    title: 'AI Assistant',
+    title: 'Deal Match AI',
     description: 'Automated email drafts, deal summaries & next-step suggestions powered by GPT.',
     badge: 'Free',
     badgeColor: 'bg-emerald-500',
@@ -60,7 +60,7 @@ export const ADDONS = [
   {
     id: 2,
     icon: '📊',
-    title: 'AI Analytics',
+    title: 'Virtual Office',
     description: 'Predictive revenue forecasting, churn detection, and lead-scoring with deep ML models.',
     badge: 'Pro',
     badgeColor: 'bg-[#009edd]',
@@ -68,7 +68,7 @@ export const ADDONS = [
   {
     id: 3,
     icon: '✍️',
-    title: 'AI Content Writer',
+    title: 'Maximus Content',
     description: 'Generate landing page copy, email sequences, and ad creatives in seconds.',
     badge: 'Pro',
     badgeColor: 'bg-[#009edd]',
@@ -76,7 +76,7 @@ export const ADDONS = [
   {
     id: 4,
     icon: '🔔',
-    title: 'Smart Automations',
+    title: 'Super Dev',
     description: 'Trigger workflows, follow-ups, and notifications based on CRM behaviour — automatically.',
     badge: 'Free',
     badgeColor: 'bg-emerald-500',
