@@ -1,0 +1,290 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Judson:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Judson:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+/* Import Tailwind CSS Layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --primaryWhite: #FFFFFF;
+    --primaryRedLight: #fff1f2;
+    --primaryRed: #FFC2C2;
+    --primaryDarkRed: #fdf0f0;
+    --secondaryRed: #c76767;
+    --tertiaryRed: #D40000;
+    --LightRed: #fbe6e6;
+    --primaryGraphRed: rgba(215, 0, 23, 0.06);
+    --extraLightRed: #e98080;
+    --tertiaryGreen: #389338;
+    --mainBlue: #5C80F5;
+    --mainPurple: #8E45F6;
+
+    --primaryBlack: #000000;
+    --secondaryBlack: rgba(0, 0, 0, 0.09);
+    --tertiaryBlack: #000000;
+
+    --lightYellow:#FFEED4;
+    --lightBlue:#D4EFFF;
+    --lightPurple:#f1f4fe;
+    --lightViolet:#f4ecfe;
+
+
+    --primaryViolet: #8E45F6;
+    --LightViolet: #fafbff;
+    --primaryBlue: #5C80F5;
+
+    --primaryGrey: #f0f2f0;
+    --secondaryGrey: #E1E1E1;
+    --tertiaryGrey: #CBCBCB;
+    --quaternaryGrey: #828282;
+    --Buttongrey:#a6a6a6;
+
+    --primaryFontSize: 1rem;
+    --primaryBorderRadius: 1rem;
+    --secondaryBorderRadius: 1.875rem;
+
+    --primaryFont: 'Judson', 'Judson', sans-serif !important;
+  }
+
+  html {
+    font-family: 'Judson', sans-serif;
+    scroll-behavior: smooth;
+    /* @apply font-Judson */
+  }
+
+  body {
+    @apply m-0 p-0 box-border transition-colors duration-700 ease-linear font-Judson select-text;
+  }
+
+  h1 {
+    @apply text-title26;
+  }
+
+  h2 {
+    @apply text-title24;
+  }
+
+  h3 {
+    @apply text-title20;
+  }
+
+  h4 {
+    @apply text-para md:text-description;
+  }
+
+  p {
+    @apply font-Poppins
+  }
+
+  ::-webkit-scrollbar {
+    @apply bg-black w-[5px] h-[5px] rounded-xl
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#009edd] rounded-xl
+  }
+
+  ::selection {
+    @apply bg-Blue-200 text-white;
+  }
+}
+
+@layer components {
+  .titleLarge {
+    @apply text-title34 md:text-title36;
+  }
+
+  .titleExtraLarge {
+    @apply text-title36 xl:text-title50;
+  }
+
+  .titleMedium {
+    @apply text-title24 md:text-title26;
+  }
+
+  .titleSmall {
+    @apply text-descriptionSmall landscape:text-title20 lg:text-title24;
+  }
+
+  .titleMini {
+    @apply text-title20
+  }
+
+  .footerTitle {
+    @apply text-title22
+  }
+
+  .redColor {
+    @apply bg-Blue-200;
+  }
+
+  .commonButton {
+    @apply bg-gradient-to-r from-Blue-100 to-Blue-200  text-white border-2 border-none  w-52 h-14 hover:bg-Blue-200 rounded-[0.5rem] !important;
+  }
+
+  .description {
+    @apply text-description;
+  }
+
+  .paragraph {
+    @apply text-para;
+  }
+
+  .common_container {
+    @apply w-11/12 lg:w-11/12 mx-auto
+  }
+
+  .commonInput {
+    @apply h-11 border border-Blue-200 placeholder:text-Blue-200 outline-none text-description px-3 w-full;
+  }
+
+  .labelForm {
+    @apply font-medium mb-1;
+  }
+
+}
+
+.videoWithPlayIcon .ant-image .ant-image-mask:hover {
+  @apply hidden
+}
+
+.ant-form-item-label {
+  @apply p-0 !important;
+}
+
+.ant-collapse-large>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box {
+  @apply p-0 !important;
+}
+
+.ant-collapse .ant-collapse-content {
+  @apply border-none border-b-0 border-t-0 bg-white rounded-lg !important;
+}
+
+.ant-collapse-header {
+  @apply bg-white text-black rounded-lg p-4 mb-2 !important;
+}
+
+.ant-layout-header {
+  @apply bg-white p-0 h-auto
+}
+
+.ant-layout-footer {
+  @apply bg-white
+}
+
+.ant-layout {
+  @apply bg-white
+}
+
+.ant-collapse>.ant-collapse-item {
+  @apply border-none bg-white
+}
+
+.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+  @apply p-4 bg-white
+}
+
+.overlay {
+  @apply w-[100vw] flex h-[100vh] z-50 overflow-hidden fixed pointer-events-none !important
+}
+
+.bar {
+  @apply w-[25vw] h-[105vh] bg-[#f2f0ff]
+}
+
+::placeholder {
+  @apply font-Judson
+}
+
+.ant-popover .ant-popover-inner {
+  @apply bg-white
+}
+
+/* .slick-dots .slick-dots-bottom{
+  @apply pt-64 mt-32 !important
+} */
+.ant-carousel .slick-dots-bottom {
+  @apply -bottom-16
+}
+.ant-image .ant-image-img{
+  @apply w-auto !important
+}
+
+/* 2. Pulse animation used by .eyebrow-dot and .live-dot */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 4px #009edd; }
+  50%       { box-shadow: 0 0 14px #009edd, 0 0 28px rgba(0, 158, 221, 0.4); }
+}
+@keyframes cursor-bob {
+  0%, 100% { transform: translate(0, 0);   }
+  40%       { transform: translate(18px, 12px); }
+  70%       { transform: translate(6px, 24px);  }
+}
+ @keyframes loader-scan {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+ 
+ 
+.eyebrow-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+ 
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+ 
+/* 3. Card top-edge glow line (::before pseudo-element) */
+.reveal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 158, 221, 0.3), transparent);
+}
+ 
+/* 4. Primary button shimmer overlay (::before pseudo-element) */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+ 
+.btn-primary:hover::before {
+  opacity: 1;
+}
+ 
+/* 5. Arrow icon nudge on button hover (child element selector) */
+.btn-primary:hover .btn-primary-arrow {
+  transform: translateX(3px);
+}
+ 
+ 
+.feature-card-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #009edd, rgba(0, 158, 221, 0.2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+ 
+/* Animate the rule in on hover */
+.group:hover .feature-card-rule {
+  transform: scaleX(1);
+}
+ 

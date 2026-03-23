@@ -1,0 +1,8 @@
+******************************** Branches ********************************
+1. dev :- Development
+2. prod :- Production
+3. main :- Main
+
+********************************** Build **********************************
+* Build from "dev" branch for DEVELOPMENT
+* Build from "prod" branch for PRODUCTION

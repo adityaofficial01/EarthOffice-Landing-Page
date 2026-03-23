@@ -1,0 +1,9 @@
+{
+  "id": "React Boiler",
+  "short_name": "React Boiler",
+  "name": "React Boiler",
+  "description": "React Boiler",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone"
+}

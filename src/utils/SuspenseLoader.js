@@ -1,0 +1,220 @@
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+
+/*
+  HOW IT WORKS
+  ─────────────────────────────────────────────────────────────────────────
+  1. Screen is split into two panels (top / bottom) — both `#0d1117`.
+  2. "EarthOffice" renders twice stacked:
+       • Ghost layer  — outlined stroke text, very low opacity
+       • Fill layer   — same text clipped by a rect that expands left→right
+     This creates the "ink filling into letters" effect.
+  3. A thin progress bar fills in sync with the text reveal.
+  4. A DM Mono percentage counter ticks up.
+  5. A small logo mark fades in above the text.
+  6. On complete, the two panels slide apart (top goes up, bottom goes down)
+     revealing the page underneath — cinematic curtain-open exit.
+  ─────────────────────────────────────────────────────────────────────────
+*/
+
+// ── index.css additions (add once) ────────────────────────────────────────
+// @keyframes loader-scan {
+//   0%   { transform: translateX(-100%); }
+//   100% { transform: translateX(100%); }
+// }
+
+const DURATION = 2200; // ms for the fill animation
+
+export default function SuspenseLoader({ onComplete }) {
+  const wrapRef    = useRef(null);
+  const topRef     = useRef(null);
+  const bottomRef  = useRef(null);
+  const fillRef    = useRef(null);   // the clip rect div
+  const barRef     = useRef(null);   // progress bar fill
+  const countRef   = useRef(null);   // percentage counter
+  const logoRef    = useRef(null);
+  const tagRef     = useRef(null);
+  const centreRef  = useRef(null);   // centre content (text, bar, logo)
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // ── Exit: curtain panels slide apart ───────────────────────────
+        gsap.timeline({
+          onComplete: () => {
+            if (onComplete) onComplete();
+            // Hide the whole wrapper after exit
+            gsap.set(wrapRef.current, { display: 'none' });
+          },
+        })
+        .to(centreRef.current,   { opacity: 0, duration: 0.3, ease: 'power2.in' }, 0)
+        .to(topRef.current,    { y: '-100%', duration: 0.85, ease: 'power4.inOut' }, 0)
+        .to(bottomRef.current, { y: '100%',  duration: 0.85, ease: 'power4.inOut' }, 0);
+      },
+    });
+
+    // 1. Logo fades in
+    tl.fromTo(logoRef.current,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+    )
+    // 2. Tag line fades in
+    .fromTo(tagRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4, ease: 'power2.out' },
+      '-=0.2'
+    )
+    // 3. Fill clip expands left→right + bar + counter simultaneously
+    .to(fillRef.current, {
+      width: 'calc(100% + 1em)',
+      duration: DURATION / 1000,
+      ease: 'power2.inOut',
+    }, '+=0.15')
+    .to(barRef.current, {
+      width: '100%',
+      duration: DURATION / 1000,
+      ease: 'power2.inOut',
+    }, '<')
+    // Counter ticks 0→100
+    .call(() => {
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: 100,
+        duration: DURATION / 1000,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          if (countRef.current) {
+            countRef.current.textContent = Math.round(obj.val).toString().padStart(3, '0');
+          }
+        },
+      });
+    }, [], '<')
+    // 4. Hold briefly
+    .to({}, { duration: 0.3 });
+
+    return () => tl.kill();
+  }, [mounted, onComplete]);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="fixed inset-0 z-[9999] pointer-events-none"
+      aria-hidden="true"
+    >
+      {/* ── Top panel ── */}
+      <div
+        ref={topRef}
+        className="absolute inset-x-0 top-0"
+        style={{ height: '50%', background: '#0d1117' }}
+      />
+      {/* ── Bottom panel ── */}
+      <div
+        ref={bottomRef}
+        className="absolute inset-x-0 bottom-0"
+        style={{ height: '50%', background: '#0d1117' }}
+      />
+
+      {/* ── Centre content (sits over both panels, centred on the seam) ── */}
+      <div ref={centreRef} className="absolute inset-0 flex flex-col items-center justify-center gap-8 pointer-events-none">
+
+        {/* Logo mark */}
+        <div ref={logoRef} className="opacity-0 flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg,#009edd,#0277bd)', boxShadow: '0 0 20px rgba(0,158,221,0.4)' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.5"/>
+              <path d="M3 12h18M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        {/* ── Text reveal block ── */}
+        <div className="relative select-none" style={{ lineHeight: 1, paddingBottom: '0.25em' }}>
+          {/*
+            Ghost layer — full text in outline only.
+            This is always visible as the "empty" state.
+          */}
+          <span
+            className="font-['DM_Serif_Display',serif] italic tracking-[-0.04em]"
+            style={{
+              fontSize: 'clamp(3.5rem, 10vw, 8rem)',
+              color: 'transparent',
+              WebkitTextStroke: '1px rgba(255,255,255,0.12)',
+              display: 'block',
+              whiteSpace: 'nowrap',
+            }}
+            aria-hidden="true"
+          >
+            EarthOffice
+          </span>
+
+          {/*
+            Fill layer — same text in solid colour, clipped by an
+            expanding rect div. Width goes 0% → 100% via GSAP.
+          */}
+          <div
+            ref={fillRef}
+            className="absolute top-0 left-0 overflow-hidden"
+            style={{ width: '0%', height: '150%' }}
+          >
+            <span
+              className="font-['DM_Serif_Display',serif] italic tracking-[-0.04em]"
+              style={{
+                fontSize: 'clamp(3.5rem, 10vw, 8rem)',
+                color: '#e6edf3',
+                display: 'block',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Earth<span style={{ color: '#009edd' }}>Office</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Tag */}
+        <p
+          ref={tagRef}
+          className="font-['DM_Mono',monospace] text-[11px] tracking-[0.2em] uppercase opacity-0"
+          style={{ color: '#8b949e' }}
+        >
+          The CRM that works for you
+        </p>
+
+        {/* ── Progress row ── */}
+        <div className="flex items-center gap-4 w-full max-w-xs px-4">
+          {/* Bar track */}
+          <div
+            className="flex-1 h-[2px] rounded-full overflow-hidden"
+            style={{ background: 'rgba(255,255,255,0.06)' }}
+          >
+            <div
+              ref={barRef}
+              className="h-full rounded-full"
+              style={{
+                width: '0%',
+                background: 'linear-gradient(90deg, #009edd, rgba(0,158,221,0.5))',
+                boxShadow: '0 0 8px rgba(0,158,221,0.6)',
+              }}
+            />
+          </div>
+          {/* Counter */}
+          <span
+            ref={countRef}
+            className="font-['DM_Mono',monospace] text-[11px] tabular-nums shrink-0"
+            style={{ color: '#8b949e', minWidth: '2.5rem', textAlign: 'right' }}
+          >
+            000
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
